@@ -74,3 +74,9 @@ SELECT GroupId FROM TEAM WHERE GroupName = $GroupName;
 INSERT INTO Members VALUES ($GroupId,$Email);
 
 -- Task 3: View and submit Team Progress
+
+-- View Team Progress
+/*
+$Groupid is integer
+*/
+SELECT SUM(swimming), SUM(biking),SUM(running) FROM race_progress INNER JOIN members ON race_progress.useremail = members.useremail WHERE groupid = $GroupId;
