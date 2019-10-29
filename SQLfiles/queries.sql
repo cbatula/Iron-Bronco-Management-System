@@ -23,7 +23,7 @@ CREATE TABLE Members (
 
 -- Register for Iron Bronco
 
-INSERT INTO Participant VALUES ('a1@scu.edu','Aria','password',NULL);
+INSERT INTO Participant VALUES ($Email,$Name,$Password,NULL);
 
 /*
 CREATE TABLE Race_Progress (
