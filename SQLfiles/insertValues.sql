@@ -1,6 +1,6 @@
 /* Make some sample groups */
-INSERT INTO Team VALUES (1,'A',NULL);
-INSERT INTO Team VALUES (2,'B',NULL);
+INSERT INTO Team VALUES (0,'A',NULL);
+INSERT INTO Team VALUES (1,'B',NULL);
 
 /* Make some sample participants */
 INSERT INTO Participant VALUES ('a1@scu.edu','Aria','password',NULL);
@@ -17,12 +17,12 @@ INSERT INTO Participant VALUES ('a11@scu.edu','Keeley','password',NULL);
 
 /* Put some particpants in groups */
 -- 1 group filled
-INSERT INTO Members VALUES (1,'a1@scu.edu');
-INSERT INTO Members VALUES (1,'a2@scu.edu');
-INSERT INTO Members VALUES (1,'a3@scu.edu');
+INSERT INTO Members VALUES (0,'a1@scu.edu');
+INSERT INTO Members VALUES (0,'a2@scu.edu');
+INSERT INTO Members VALUES (0,'a3@scu.edu');
 -- 1 group not completely filled
-INSERT INTO Members VALUES (2,'a4@scu.edu');
-INSERT INTO Members VALUES (2,'a5@scu.edu');
+INSERT INTO Members VALUES (1,'a4@scu.edu');
+INSERT INTO Members VALUES (1,'a5@scu.edu');
 
 /* Put some participants that will be assigned to groups */
 INSERT INTO Participant_Not_In_Group VALUES ('a6@scu.edu');
@@ -39,5 +39,5 @@ INSERT INTO Race_Progress VALUES ('a3@scu.edu',date '2019-11-01',0.1,0.2,0.3);
 INSERT INTO Race_Progress VALUES ('a3@scu.edu',date '2019-11-02',0.2,0.3,0.4);
 
 /* Give some sample team requests */
-INSERT INTO Team_Requests VALUES (2,'a10@scu.edu');
-INSERT INTO Team_Requests VALUES (2,'a11@scu.edu');
+INSERT INTO Team_Requests VALUES (1,'a10@scu.edu');
+INSERT INTO Team_Requests VALUES (1,'a11@scu.edu');

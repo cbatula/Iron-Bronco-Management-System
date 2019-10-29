@@ -19,13 +19,7 @@ CREATE TABLE Members (
   FOREIGN KEY (GroupId) REFERENCES Team(GroupId),
   FOREIGN KEY (UserEmail) REFERENCES Participant(Email)
 );
-*/
 
--- Register for Iron Bronco
-
-INSERT INTO Participant VALUES ($Email,$Name,$Password,NULL);
-
-/*
 CREATE TABLE Race_Progress (
   UserEmail VARCHAR(30),
   Time DATE,
@@ -35,8 +29,7 @@ CREATE TABLE Race_Progress (
   PRIMARY KEY (UserEmail, Time),
   FOREIGN KEY (UserEmail) REFERENCES Participant(Email)
 );
-*/
-/*
+
 CREATE TABLE Participant_Not_In_Group (
   Email VARCHAR(30) PRIMARY KEY,
   FOREIGN KEY (Email) REFERENCES Participant(Email)
@@ -50,3 +43,23 @@ CREATE TABLE Team_Requests (
   FOREIGN KEY (UserEmail) REFERENCES Participant(Email)
 );
 */
+
+
+-- Task: Register for Iron Bronco
+
+/*
+$Email is a string
+$Name is a string
+$Password is a string
+*/
+INSERT INTO Participant VALUES ($Email,$Name,$Password,NULL);
+
+-- Create a Team
+
+SELECT COUNT(*) FROM Team;
+/*
+Save above value as $GroupId
+$GroupName is string
+*/
+INSERT INTO Team VALUES ($GroupId,$GroupName,NULL);
+INSERT INTO Members VALUES ($GroupId,$Email);
