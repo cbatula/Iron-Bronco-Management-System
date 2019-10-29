@@ -45,7 +45,7 @@ CREATE TABLE Team_Requests (
 */
 
 
--- Task: Register for Iron Bronco
+-- Task 1: Register for Iron Bronco
 
 /*
 $Email is a string
@@ -54,7 +54,7 @@ $Password is a string
 */
 INSERT INTO Participant VALUES ($Email,$Name,$Password,NULL);
 
--- Create a Team
+-- Task 2a: Create a Team
 
 SELECT COUNT(*) FROM Team;
 /*
@@ -63,3 +63,14 @@ $GroupName is string
 */
 INSERT INTO Team VALUES ($GroupId,$GroupName,NULL);
 INSERT INTO Members VALUES ($GroupId,$Email);
+
+-- Task 2b: Join a team
+
+/*
+$Groupname is string
+*/
+SELECT GroupId FROM TEAM WHERE GroupName = $GroupName;
+--Save avove value as $GroupId
+INSERT INTO Members VALUES ($GroupId,$Email);
+
+-- Task 3: View and submit Team Progress
