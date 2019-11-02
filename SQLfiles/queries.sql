@@ -70,10 +70,9 @@ END;
 -- Task 2b: Join a team
 
 /*
-$Groupname is string
+$GroupIp is number
+$Email is string
 */
-SELECT GroupId FROM TEAM WHERE GroupName = $GroupName;
---Save avove value as $GroupId
 INSERT INTO Members VALUES ($GroupId,$Email);
 
 -- Task 3: View and submit Team Progress
