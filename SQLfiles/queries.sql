@@ -56,13 +56,16 @@ INSERT INTO Participant VALUES ($Email,$Name,$Password,NULL);
 
 -- Task 2a: Create a Team
 
-SELECT COUNT(*) FROM Team;
 /*
-Save above value as $GroupId
-$GroupName is string
-*/
+This is done inside Procedure CreateTeam
+SELECT COUNT(*) FROM Team;
 INSERT INTO Team VALUES ($GroupId,$GroupName,NULL);
 INSERT INTO Members VALUES ($GroupId,$Email);
+*/
+
+BEGIN
+  createteam(:groupname,:email);
+END;
 
 -- Task 2b: Join a team
 
