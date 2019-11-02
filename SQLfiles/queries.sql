@@ -75,8 +75,18 @@ INSERT INTO Members VALUES ($GroupId,$Email);
 
 -- Task 3: View and submit Team Progress
 
--- View Team Progress
 /*
 $Groupid is integer
 */
+-- View Team Progress
 SELECT SUM(swimming), SUM(biking),SUM(running) FROM race_progress INNER JOIN members ON race_progress.useremail = members.useremail WHERE groupid = $GroupId;
+
+/*
+$swimToday, $bikeToday, $runToday are numbers
+$Email is string
+$Date is properly formatted date - see insertValues.sql
+*/
+--Update Team Progress
+UPDATE race_progress
+SET swimming = $swimToday, biking = $bikeToday, running = $runToday
+WHERE race_progress.useremail = $Email AND time = $date;
