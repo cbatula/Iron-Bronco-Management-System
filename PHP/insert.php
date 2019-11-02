@@ -1,6 +1,6 @@
 <?php
-$first = $_POST['FirstName']
-$last = $_POST['LastName']
+$first = $_POST['FirstName'];
+$last = $_POST['LastName'];
 
 $Email = $_POST['email'];
 $Name = $first." ".$last;
