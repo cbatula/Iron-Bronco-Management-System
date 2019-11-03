@@ -7,8 +7,11 @@
 <body>
   <h1>Create Team</h1>
   <form action="../PHP/createTeam.php" method='post'>
-    <label for="groupName">Group Name: </label> 
+    <label for="groupName">Group Name: </label> <br />
     <input type="text" name="groupName" id="groupName" /> <br />
+    <!-- Have userEmail as a form value for testing, this will be a session variable-->
+    <label for="userEmail">User Email: </label> <br />
+    <input type="text" name="userEmail" id="userEmail" /> <br />
     <input type="submit" value="Submit"/>
   </form>
 </body>
