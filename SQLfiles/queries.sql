@@ -86,9 +86,9 @@ SELECT SUM(swimming), SUM(biking),SUM(running) FROM race_progress INNER JOIN mem
 /*
 $swimToday, $bikeToday, $runToday are numbers
 $Email is string
-$Date is properly formatted date - see insertValues.sql
+$day is properly formatted date as 'YYYY-MM-DD'
 */
 --Update Team Progress
 UPDATE race_progress
 SET swimming = $swimToday, biking = $bikeToday, running = $runToday
-WHERE race_progress.useremail = $Email AND time = $date;
+WHERE useremail = $Email AND time = date $day;
