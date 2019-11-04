@@ -40,7 +40,7 @@ CREATE OR REPLACE FUNCTION joinTeamStatus
   userEmail0 IN members.useremail%type
 ) RETURN number
 IS
-  numMembers numer;
+  numMembers number;
   gID number;
 BEGIN
   SELECT groupId INTO gId FROM team WHERE groupName = groupName0;

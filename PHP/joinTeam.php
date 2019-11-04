@@ -19,7 +19,21 @@
       echo 'Function called successfully.';
       //Don't know if actually inserted or not (either constraint of 3 not satisfied or successfully joined)
     }
-    
+
+    /*
+     * $sql = " BEGIN :v = joinTeamStatus(:groupname,:useremail); NED;";
+     * $query = oci_parse($conn,$sql);
+     * oci_bind_by_name($query,':groupname',$groupName);
+     * oci_bind_by_name($query,':useremail',$userEmail);
+     * oci_bind_by_name($query,':v',$returnVal);
+     * if(oci_execute($query)) {
+     *   echo 'Function called successfully';
+     *   if($v < 3) {
+     *    echo 'User inserted into team';
+     *   }
+     * }
+     */
+
     session_name( 'user' );
     session_start();
     $stid = oci_parse($c, "SELECT groupId FROM team WHERE groupName = :groupName");
