@@ -19,5 +19,16 @@
       echo 'Function called successfully.';
       //Don't know if actually inserted or not (either constraint of 3 not satisfied or successfully joined)
     }
-  }
+    
+    session_name( 'user' );
+    session_start();
+    $stid = oci_parse($c, "SELECT groupId FROM team WHERE groupName = :groupName");
+    oci_bind_by_name($stid, ':groupName', $groupName);
+    oci_execute($stid);
+    if (!$stid) {
+        echo "Error in preparing the statement";
+        exit;
+    }
+    $row = oci_fetch_assoc($stid); 
+    $_SESSION['groupId'] = $row['groupId'];
 ?>
