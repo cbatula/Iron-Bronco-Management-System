@@ -70,10 +70,18 @@ END;
 -- Task 2b: Join a team
 
 /*
-$GroupIp is number
-$Email is string
+Groupname is string
+Email is string
+In procedure jointeam:
+  SELECT groupId INTO gId FROM team WHERE groupName = groupName0;
+  SELECT COUNT(*) INTO numMembers FROM members WHERE groupId = gId;
+  IF (numMembers < 3)
+  THEN
+    INSERT INTO Members VALUES (gId,userEmail0);
+  END IF;
 */
-INSERT INTO Members VALUES ($GroupId,$Email);
+
+BEGIN jointeam(:groupname,:useremail); END;
 
 -- Task 3: View and submit Team Progress
 
