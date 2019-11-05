@@ -18,23 +18,44 @@
      oci_bind_by_name($query,':useremail',$userEmail);
      oci_bind_by_name($query,':v',$returnVal);
      if(oci_execute($query)) {
-       echo 'Function called successfully <br/>';
+       //echo 'Function called successfully <br/>';
        if($returnVal < 3) {
          echo 'User inserted into team <br />';
+
+			echo $groupName;    
+
+
+			
+
+			session_name( 'user' );
+			session_start();
+			$stid = oci_parse($conn, "SELECT groupId FROM team WHERE groupName = :groupName");
+			oci_bind_by_name($stid, ':groupName', $groupName);
+			oci_execute($stid);
+
+			if (!$stid) {
+				echo "Error in preparing the statement";
+				exit;
+			}
+			
+			$row = oci_fetch_assoc($stid); 
+
+
+			var_dump($row);
+
+
+			$_SESSION['groupId'] = $row["GROUPID"];
+			echo "test ".$row["GROUPID"]." yeah";
+
+			header("Location: ./home.php");
+			exit;
+
+			$_SESSION['groupId'] = $row['groupId'];
+
        }
+		else
+			echo "Group full: return and try again.";
      }
   }
-    
-    session_name( 'user' );
-    session_start();
-    $stid = oci_parse($conn, "SELECT groupId FROM team WHERE groupName = :groupName");
-    oci_bind_by_name($stid, ':groupName', $groupName);
-    oci_execute($stid);
-    if (!$stid) {
-        echo "Error in preparing the statement";
-        exit;
-    }
-    $row = oci_fetch_assoc($stid); 
-    $_SESSION['groupId'] = $row['groupId'];
     
 ?>
