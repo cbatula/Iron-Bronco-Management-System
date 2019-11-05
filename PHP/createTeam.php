@@ -19,10 +19,11 @@
       echo 'Group successfully created.';
     }
     
+    //echo $groupName;
 	  
     session_name( 'user' );
     session_start();
-    $stid = oci_parse($c, "SELECT groupId FROM team WHERE groupName = :groupName");
+    $stid = oci_parse($conn, "SELECT groupId FROM team WHERE groupName = :groupName");
     oci_bind_by_name($stid, ':groupName', $groupName);
     oci_execute($stid);
 
@@ -32,5 +33,13 @@
     }
     
     $row = oci_fetch_assoc($stid); 
-    $_SESSION['groupId'] = $row['groupId'];
+
+    //var_dump($row);
+
+    $_SESSION['groupId'] = $row["GROUPID"];
+    //echo "test ".$row["GROUPID"]." yeah";
+
+    header("Location: ./home.php");
+    exit;
+}
 ?>
