@@ -42,6 +42,7 @@ CREATE OR REPLACE FUNCTION joinTeamStatus
 IS
   numMembers number;
   gID number;
+  PRAGMA AUTONOMOUS_TRANSACTION;
 BEGIN
   SELECT groupId INTO gId FROM team WHERE groupName = groupName0;
   SELECT COUNT(*) INTO numMembers FROM members WHERE groupId = gId;
@@ -49,6 +50,7 @@ BEGIN
   THEN
     INSERT INTO Members VALUES (gId,userEmail0);
   END IF;
+  COMMIT;
   RETURN numMembers;
 END;
 /
