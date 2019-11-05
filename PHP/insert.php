@@ -5,16 +5,13 @@ if ($c) {
 	echo "Successfully connected to Oracle.\n";
 
 	if(isset($_POST['submit'])){
-		session_name( 'user' );
-		session_start();
-	
 		$first = $_POST['FirstName'];
 		$last = $_POST['LastName'];
 		$choice = $_POST['choice'];
 
-		$_SESSION["email"] = $_POST['email'];
-		$_SESSION['name'] = $first." ".$last;
-		$_SESSION['password'] = $_POST['password'];
+		$email = $_POST['email'];
+		$name = $first." ".$last;
+		$password = $_POST['password'];
 		//$passcheck = $_POST['passw2'];
 		//$groupName = $_POST['group'];
 
@@ -23,9 +20,9 @@ if ($c) {
 		}*/
 
 		$stid = oci_parse($c, "INSERT INTO Participant VALUES (:Email,:Name, :Password, NULL)");
-		oci_bind_by_name($stid, ':Email', $_SESSION["email"]);
-		oci_bind_by_name($stid, ':Name', $_SESSION['name']);
-		oci_bind_by_name($stid, ':Password', $_SESSION['password']);
+		oci_bind_by_name($stid, ':Email', $email);
+		oci_bind_by_name($stid, ':Name', $name);
+		oci_bind_by_name($stid, ':Password', $password);
 
 		oci_execute($stid);
 
@@ -35,6 +32,14 @@ if ($c) {
 		}
 
 		print "Record Inserted";
+		
+		
+		session_name( 'user' );
+		session_start();
+		
+		$_SESSION['email'] = $email;
+		$_SESSION['name'] = $name;
+		$_SESSION['password'] = $password;
 
 
 		//SET swimming = $swimToday, biking = $bikeToday, running = $runToday
@@ -50,9 +55,10 @@ if ($c) {
 			header("Location: ../HTML/createTeam.html");
 			exit;
 
-		else{
+		}else{
 			echo "Error, please go back and choose a group option";
 			exit;
+		}
   	}
 
 	else{
