@@ -11,16 +11,6 @@
       print htmlentities($e['message']);
       exit;
     }
-    /*
-    $sql = "BEGIN jointeam(:groupname,:useremail); END;";
-    $query = oci_parse($conn,$sql);
-    oci_bind_by_name($query, ':groupname',$groupName);
-    oci_bind_by_name($query, ':useremail',$userEmail);
-    if(oci_execute($query)) {
-      echo 'Function called successfully.';
-      //Don't know if actually inserted or not (either constraint of 3 not satisfied or successfully joined)
-    }
-    */
 
      $sql = " BEGIN :v := joinTeamStatus(:groupname,:useremail); END;";
      $query = oci_parse($conn,$sql);
@@ -30,14 +20,14 @@
      if(oci_execute($query)) {
        echo 'Function called successfully <br/>';
        if($returnVal < 3) {
-         echo 'User inserted into team';
+         echo 'User inserted into team <br />';
        }
      }
   }
-    /*
+    
     session_name( 'user' );
     session_start();
-    $stid = oci_parse($c, "SELECT groupId FROM team WHERE groupName = :groupName");
+    $stid = oci_parse($conn, "SELECT groupId FROM team WHERE groupName = :groupName");
     oci_bind_by_name($stid, ':groupName', $groupName);
     oci_execute($stid);
     if (!$stid) {
@@ -46,5 +36,5 @@
     }
     $row = oci_fetch_assoc($stid); 
     $_SESSION['groupId'] = $row['groupId'];
-    */
+    
 ?>
