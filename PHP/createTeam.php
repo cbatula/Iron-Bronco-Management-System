@@ -19,7 +19,7 @@
       echo 'Group successfully created.';
     }
     
-    //echo $groupName;
+	echo $groupName;
 	  
     session_name( 'user' );
     session_start();
@@ -34,12 +34,13 @@
     
     $row = oci_fetch_assoc($stid); 
 
-    //var_dump($row);
+    var_dump($row);
+
 
     $_SESSION['groupId'] = $row["GROUPID"];
-    //echo "test ".$row["GROUPID"]." yeah";
+	echo "test ".$row["GROUPID"]." yeah";
 
-    header("Location: ./home.php");
-    exit;
+	header("Location: ./home.php");
+	exit;
 }
 ?>
