@@ -60,10 +60,10 @@ if ($c) {
     } else {
       $sql = "INSERT INTO race_progress VALUES (:email,TO_DATE('$date','YY-MM-DD'),:swimming,:biking,:running)";
       $stid = oci_parse($c,$sql);
-      oci_bind_by_name($stid_post, ':email', $email);
-      oci_bind_by_name($stid_post, ':running', $running);
-      oci_bind_by_name($stid_post, ':swimming', $swimming);
-      oci_bind_by_name($stid_post, ':biking', $biking);
+      oci_bind_by_name($stid, ':email', $email);
+      oci_bind_by_name($stid, ':running', $running);
+      oci_bind_by_name($stid, ':swimming', $swimming);
+      oci_bind_by_name($stid, ':biking', $biking);
       $tf1 = oci_execute($stid);
       if(!$tf1) {
         echo "Error in preparing the statement";
@@ -75,7 +75,8 @@ if ($c) {
 
 		oci_commit($c);
 		OCILogoff($c);
-		header("Location: ../HTML/index.html");
+
+		header("Location: ../HTML/input.html");
 		exit();
 
   	
