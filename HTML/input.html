@@ -5,30 +5,49 @@
 
 	<body>
 		<center> Values will be added to total distance.
-		<form>
+		<form action="./insert.php", method="post">
 
 			<center><fieldset class="fieldset-auto-width">		
 		
 				<center><p>
+        	  			<label>Email</label>
+        		  		<input type = "text"
+        		        	name = "email"
+       			         	value = "user@scu.edu" />
+       				</p>
+				<p>
+        	  			<label>Date</label>
+        		  		<input type = "date"
+        		        	name = "date"
+       			         	value = "YYYY-MM-DD" />
+       				</p>
+				<p>
         	  			<label>Running</label>
           				<input type = "text"
-          		      		id = "runningDist"
+          		      		name = "runningDist"
         	  	      		value = "Miles" />
        				</p>
 	
 				<p>
         	  			<label>Swimming</label>
         		  		<input type = "text"
-        		        	id = "swimmingDist"
+        		        	name = "swimmingDist"
        			         	value = "Miles" />
        				</p>
 		
 				<p>
           				<label>Biking</label>
           				<input type = "text"
-               		 		id = "bikingDist"
+               		 		name = "bikingDist"
                 			value = "Miles" />
        				</p>
+				<p>
+        	  			<label></label>
+        		  		<input type = "submit"
+        		        	name = "submit"
+       			         	value = "Submit" />
+       				</p>
+
 			</fieldset>
 		</form>
 		</center>
