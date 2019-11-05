@@ -75,6 +75,7 @@ if ($c) {
 
 		oci_commit($c);
 		OCILogoff($c);
+		header("Location: ../HTML/index.html");
 
   	
 
