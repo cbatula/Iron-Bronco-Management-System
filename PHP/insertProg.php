@@ -67,7 +67,7 @@ if ($c) {
       $tf1 = oci_execute($stid);
       if(!$tf1) {
         echo "Error in preparing the statement";
-        exit;
+        exit();
       }
       print "Inputs Recorded for insert.\n";
     }
@@ -75,6 +75,8 @@ if ($c) {
 
 		oci_commit($c);
 		OCILogoff($c);
+		header("Location: ../HTML/index.html");
+		exit();
 
   	
 
