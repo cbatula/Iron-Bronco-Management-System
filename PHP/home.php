@@ -20,13 +20,15 @@ if ($c) {
 
 		$stid = oci_parse($c, "SELECT SUM(swimming), SUM(biking),SUM(running) FROM race_progress INNER JOIN members ON race_progress.useremail = members.useremail WHERE groupid = :GroupId");
 
+		$id = 0;
+
 		if (!$stid) {
 			$e = oci_error($c);
 			trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
 		}
 
 		//assuming group ID has been saved to session
-		oci_bind_by_name($stid, ':GroupId', $_SESSION['groupId']);
+		oci_bind_by_name($stid, ':GroupId', $id);
 
 
 		$result = oci_execute($stid);
@@ -36,6 +38,15 @@ if ($c) {
 		}
 
 		$row = oci_fetch_assoc($stid);
+
+		if( $row['SUM(SWIMMING)'] == NULL )
+			$row['SUM(SWIMMING)'] = 0;
+
+		if( $row['SUM(BIKING)'] == NULL )
+			$row['SUM(BIKING)'] = 0;
+
+		if( $row['SUM(RUNNING)'] == NULL )
+			$row['SUM(RUNNING)'] = 0;
 
 		oci_commit($c);
 		OCILogoff($c);
@@ -103,7 +114,7 @@ section:after {
 /* Style the footer */
 footer {
   position : absolute;
-  bottom : 0;
+  bottom : 0;$_SESSION['groupId']
   width: 100%;
   background-color: #777;
   padding: 10px;
@@ -128,8 +139,10 @@ footer {
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Day', 'Swimming', 'Biking', 'Running'],
-          ['1', 1000, 400, 200],
-		<?php echo "[2, ".$row['SUM(swimming)'].", ".$row['SUM(biking)'].", ".$row['SUM(running)']."]," ?>
+
+		<?php if($row['SUM(SWIMMING)'] != 0 && $row['SUM(BIKING)'] != 0 && $row['SUM(RUNNING)'] != 0 )
+
+echo "[2, ".$row['SUM(SWIMMING)'].", ".$row['SUM(BIKING)'].", ".$row['SUM(RUNNING)']."]," ?>
         ]);
 
         var options = {
@@ -170,6 +183,7 @@ footer {
   <article>
     <h1>Current Progress</h1>
 
+
   </article>
 
 
@@ -188,4 +202,3 @@ footer {
 
 </body>
 </html>
-
