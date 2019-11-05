@@ -15,25 +15,6 @@ BEGIN
 END;
 /
 
-CREATE OR REPLACE PROCEDURE
-joinTeam
-(
-  groupName0 IN team.groupname%type,
-  userEmail0 IN members.useremail%type
-)
-IS
-numMembers number;
-gID number;
-BEGIN
-  SELECT groupId INTO gId FROM team WHERE groupName = groupName0;
-  SELECT COUNT(*) INTO numMembers FROM members WHERE groupId = gId;
-  IF (numMembers < 3)
-  THEN
-    INSERT INTO Members VALUES (gId,userEmail0);
-  END IF;
-END;
-/
-
 CREATE OR REPLACE FUNCTION joinTeamStatus
 (
   groupName0 IN team.groupname%type,
