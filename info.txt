@@ -9,7 +9,7 @@ NO GROUP database for waiting for accepting requests and after removal
 Team page: edit team name, accept or reject requests, remove members
 
 Email: scu.edu
-Email a password reset
+Email a (temporary) password reset, AND reset after logging in
 
 
 GET RID OF PROGRESS?
