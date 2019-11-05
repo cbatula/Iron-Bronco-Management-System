@@ -55,9 +55,10 @@ if ($c) {
 			header("Location: ../HTML/createTeam.html");
 			exit;
 
-		else{
+		}else{
 			echo "Error, please go back and choose a group option";
 			exit;
+		}
   	}
 
 	else{
