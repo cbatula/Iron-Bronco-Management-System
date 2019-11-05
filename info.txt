@@ -1,0 +1,21 @@
+login - make it all session variables 
+team members accept/remove
+ADMIN
+group request system
+rand/search
+
+NO GROUP database for waiting for accepting requests and after removal
+
+Team page: edit team name, accept or reject requests, remove members
+
+Email: scu.edu
+Email a password reset
+
+
+GET RID OF PROGRESS?
+
+
+
+FORMATTING
+Bootstrap 4 Chart.js - Bar Chart
+
