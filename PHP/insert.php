@@ -5,9 +5,6 @@ if ($c) {
 	echo "Successfully connected to Oracle.\n";
 
 	if(isset($_POST['submit'])){
-		session_name( 'user' );
-		session_start();
-	
 		$first = $_POST['FirstName'];
 		$last = $_POST['LastName'];
 		$choice = $_POST['choice'];
@@ -35,6 +32,10 @@ if ($c) {
 		}
 
 		print "Record Inserted";
+		
+		
+		session_name( 'user' );
+		session_start();
 		
 		$_SESSION['email'] = $email;
 		$_SESSION['name'] = $name;
