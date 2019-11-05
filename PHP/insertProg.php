@@ -58,7 +58,18 @@ if ($c) {
       print "Inputs Recorded.\n";
 
     } else {
-      //TODO: Do similar thing for insert
+      $sql = "INSERT INTO race_progress VALUES (:email,TO_DATE('$date','YY-MM-DD'),:swimming,:biking,:running)";
+      $stid = oci_parse($c,$sql);
+      oci_bind_by_name($stid_post, ':email', $email);
+      oci_bind_by_name($stid_post, ':running', $running);
+      oci_bind_by_name($stid_post, ':swimming', $swimming);
+      oci_bind_by_name($stid_post, ':biking', $biking);
+      $tf1 = oci_execute($stid);
+      if(!$tf1) {
+        echo "Error in preparing the statement";
+        exit;
+      }
+      print "Inputs Recorded for insert.\n";
     }
 		//SET swimming = $swimToday, biking = $bikeToday, running = $runToday
 
