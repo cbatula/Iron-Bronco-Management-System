@@ -29,35 +29,37 @@ if ($c) {
 
 		$row = oci_fetch_assoc($stid_get);
 
-		
-
-		$running = $row['RUNNING'] + $_POST['runningDist'];
-		$swimming = $row['SWIMMING'] + $_POST['swimmingDist'];
-		$biking = $row['BIKING'] + $_POST['bikingDist'];
-
-
 //		$_SESSION["running"] = $running;
 //		$_SESSION['swimming'] = $swimming;
 //		$_SESSION['biking'] = $biking;
+		
 
+		$running = $_POST['runningDist'];
+		$swimming = $_POST['swimmingDist'];
+		$biking = $_POST['bikingDist'];
 
+    if($row) {
+      $running += $row['RUNNING'];
+      $swimming += $row['SWIMMING'];
+      $biking += $row['BIKING'];
+      $stid_post = oci_parse($c, "UPDATE race_progress SET swimming= :swimming,biking= :biking,running= :running WHERE userEmail= :email AND time = TO_DATE('$date','YY-MM-DD')");
+      oci_bind_by_name($stid_post, ':email', $email);
+      oci_bind_by_name($stid_post, ':running', $running);
+      oci_bind_by_name($stid_post, ':swimming', $swimming);
+      oci_bind_by_name($stid_post, ':biking', $biking);
 
-		$stid_post = oci_parse($c, "UPDATE race_progress SET swimming= :swimming,biking= :biking,running= :running WHERE userEmail= :email AND time = TO_DATE('$date','YY-MM-DD')");
-		oci_bind_by_name($stid_post, ':email', $email);
-		oci_bind_by_name($stid_post, ':running', $running);
-		oci_bind_by_name($stid_post, ':swimming', $swimming);
-		oci_bind_by_name($stid_post, ':biking', $biking);
+      $tf1=oci_execute($stid_post);
 
-		$tf1=oci_execute($stid_post);
+      if (!$tf1) {
+        echo "Error in preparing the statement";
+        exit;
+      }
 
-		if (!$tf1) {
-			echo "Error in preparing the statement";
-			exit;
-		}
+      print "Inputs Recorded.\n";
 
-		print "Inputs Recorded.\n";
-
-
+    } else {
+      //TODO: Do similar thing for insert
+    }
 		//SET swimming = $swimToday, biking = $bikeToday, running = $runToday
 
 		oci_commit($c);
