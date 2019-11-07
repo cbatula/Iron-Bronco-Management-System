@@ -35,10 +35,9 @@ CREATE TABLE Participant_Not_In_Group (
 );
 
 CREATE TABLE Team_Requests (
-  GroupId NUMBER(4,0),
+  GroupName VARCHAR(30),
   UserEmail VARCHAR(30),
-  PRIMARY KEY(GroupId, UserEmail),
-  FOREIGN KEY (GroupId) REFERENCES Team(GroupId),
+  PRIMARY KEY(GroupName, UserEmail),
   FOREIGN KEY (UserEmail) REFERENCES Participant(Email)
 );
 
