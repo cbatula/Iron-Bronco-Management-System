@@ -1,58 +1,5 @@
-/*
-CREATE TABLE Team (
-  GroupId NUMBER(4,0) PRIMARY KEY,
-  GroupName VARCHAR(30) UNIQUE,
-  Completion DATE
-);
-
-CREATE TABLE Participant (
-  Email VARCHAR(30) PRIMARY KEY,
-  Name VARCHAR(40),
-  curPassword VARCHAR(255) NOT NULL,
-  prevPassword VARCHAR(255)
-);
-
-CREATE TABLE Members (
-  GroupId NUMBER(4,0),
-  UserEmail VARCHAR(30),
-  PRIMARY KEY(GroupId, UserEmail),
-  FOREIGN KEY (GroupId) REFERENCES Team(GroupId),
-  FOREIGN KEY (UserEmail) REFERENCES Participant(Email)
-);
-
-CREATE TABLE Race_Progress (
-  UserEmail VARCHAR(30),
-  Time DATE,
-  Swimming NUMBER(3,2),
-  Biking NUMBER(5,2),
-  Running NUMBER(4,2),
-  PRIMARY KEY (UserEmail, Time),
-  FOREIGN KEY (UserEmail) REFERENCES Participant(Email)
-);
-
-CREATE TABLE Participant_Not_In_Group (
-  Email VARCHAR(30) PRIMARY KEY,
-  FOREIGN KEY (Email) REFERENCES Participant(Email)
-);
-
-CREATE TABLE Team_Requests (
-  GroupId NUMBER(4,0),
-  UserEmail VARCHAR(30),
-  PRIMARY KEY(GroupId, UserEmail),
-  FOREIGN KEY (GroupId) REFERENCES Team(GroupId),
-  FOREIGN KEY (UserEmail) REFERENCES Participant(Email)
-);
-*/
-
-
--- Task 1: Register for Iron Bronco
-
-/*
-$Email is a string
-$Name is a string
-$Password is a string
-*/
-INSERT INTO Participant VALUES ($Email,$Name,$Password,NULL);
+-- Register for Iron Bronco
+INSERT INTO Participant VALUES (:email,:name,:password,NULL);
 
 -- Task 2a: Create a Team
 
@@ -63,9 +10,8 @@ INSERT INTO Team VALUES ($GroupId,$GroupName,NULL);
 INSERT INTO Members VALUES ($GroupId,$Email);
 */
 
-BEGIN
-  createteam(:groupname,:email);
-END;
+-- BEGIN createteam(:groupname,:email); END;
+INSERT INTO Team_requests VALUES (:groupname, :email);
 
 -- Task 2b: Join a team
 
@@ -81,7 +27,8 @@ In procedure jointeam:
   END IF;
 */
 
-BEGIN jointeam(:groupname,:useremail); END;
+--BEGIN jointeam(:groupname,:useremail); END;
+INSET INTO Team_requests VALUES (:groupname, :email); 
 
 -- Task 3: View and submit Team Progress
 
@@ -89,14 +36,30 @@ BEGIN jointeam(:groupname,:useremail); END;
 $Groupid is integer
 */
 -- View Team Progress
-SELECT SUM(swimming), SUM(biking),SUM(running) FROM race_progress INNER JOIN members ON race_progress.useremail = members.useremail WHERE groupid = $GroupId;
+SELECT SUM(swimming), SUM(biking),SUM(running) FROM race_progress INNER JOIN members ON race_progress.useremail = members.useremail WHERE groupid = :GroupId;
 
 /*
 $swimToday, $bikeToday, $runToday are numbers
 $Email is string
 $day is properly formatted date as 'YYYY-MM-DD'
 */
+
 --Update Team Progress
 UPDATE race_progress
-SET swimming = $swimToday, biking = $bikeToday, running = $runToday
+SET swimming = :swimToday, biking = :bikeToday, running = :runToday
 WHERE useremail = $Email AND time = date $day;
+
+--Admin removing team members
+DELETE FROM Members WHERE useremail = :email;
+
+--Admin approving team name
+DELETE FROM Group_requests WHERE groupId = :groupId AND groupName = :groupName;
+UPDATE TEAM SET Groupname = :groupname WHERE groupId = :groupId;
+
+--Admin approving starting a group
+DELETE FROM Team_Requests WHERE useremeail = :email;
+BEGIN createteam(:groupname,:email); END;
+
+  --Admin approving joining a group
+DELETE FROM Team_Requests WHERE useremail = :email;
+BEGIN jointeam(:groupname,:useremail); END;
