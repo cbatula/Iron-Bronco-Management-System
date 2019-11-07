@@ -42,6 +42,10 @@ CREATE TABLE Team_Requests (
   FOREIGN KEY (UserEmail) REFERENCES Participant(Email)
 );
 
+CREATE TABLE Group_Requests (
+  GroupId NUMBER(4,0) PRIMARY KEY,
+  GroupName VARCHAR(30);
+)
 /*
 
 Current tables 
