@@ -1,6 +1,6 @@
 login - make it all session variables 
 team members accept/remove
-ADMIN
+ADMIN -- Only accept team names
 group request system
 rand/search
 
