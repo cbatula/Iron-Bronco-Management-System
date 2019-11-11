@@ -8,7 +8,6 @@ if($c)
 	session_name( 'user' );
         session_start();
 
-	$_SESSION["email"] = $_POST["email"];
 	$email=$_POST["email"];
 	$password=$_POST["password"];	
 
@@ -31,6 +30,8 @@ if($c)
 	
 	if(strcmp($row['PASSWORD'],$_POST['password']) == 0)
 	{
+		$_SESSION["email"] = $email;
+		
  		oci_commit($c);
 		OCILogoff($c);
 		header("Location: home.php");
