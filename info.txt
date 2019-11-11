@@ -19,3 +19,6 @@ GET RID OF PROGRESS?
 FORMATTING
 Bootstrap 4 Chart.js - Bar Chart
 
+
+SQL injections
+404 errors?
