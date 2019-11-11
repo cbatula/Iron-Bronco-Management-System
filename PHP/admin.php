@@ -8,6 +8,7 @@
 <?php
   session_name('user');
   session_start();
+  $_SESSION['name'] = 'Admin';
   if($_SESSION['name'] == 'Admin') {
     $conn = OCILogon("lshen", "password",'//dbserver.engr.scu.edu/db11g');
     if(!$conn) {
@@ -23,7 +24,7 @@
         echo '<tr>';
         for ($i=1;$i <= $num_col; $i++) {
           $col_value = oci_result($query,$i);
-          echo '<td>$col_value</td>';
+          echo "<td>$col_value</td>";
         }
         echo '<td><button>Decline</button></td> <td><button>Accept</button></td>';
         echo '</tr>';
