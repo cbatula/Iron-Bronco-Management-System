@@ -32,6 +32,18 @@ if($c)
 	{
 		$_SESSION["email"] = $email;
 		
+		$stid = oci_parse($conn, "SELECT groupId FROM Members WHERE UserEmail = :UserEmail");
+		oci_bind_by_name($stid, ':UserEmail', $email);
+		oci_execute($stid);
+
+		if (!$stid) {
+			echo "Error in preparing the statement";
+			exit;
+		}
+		
+		$row = oci_fetch_assoc($query);
+        	$_SESSION["groupId"] = $row['GROUPID'];
+		
  		oci_commit($c);
 		OCILogoff($c);
 		header("Location: home.php");
