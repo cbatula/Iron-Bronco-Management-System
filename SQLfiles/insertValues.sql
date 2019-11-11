@@ -41,7 +41,3 @@ INSERT INTO Race_Progress VALUES ('a3@scu.edu',date '2019-11-01',0.3,0.3,0.3);
 INSERT INTO Race_Progress VALUES ('a3@scu.edu',date '2019-11-02',0.4,0.4,0.4);
 INSERT INTO Race_Progress VALUES ('a4@scu.edu',date '2019-11-01',0.3,0.3,0.3);
 INSERT INTO Race_Progress VALUES ('a4@scu.edu',date '2019-11-02',0.4,0.4,0.4);
-
-/* Give some sample team requests */
-INSERT INTO Team_Requests VALUES (1,'a9@scu.edu');
-INSERT INTO Team_Requests VALUES (1,'a10@scu.edu');

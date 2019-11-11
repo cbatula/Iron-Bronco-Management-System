@@ -13,8 +13,7 @@ CREATE TABLE Participant (
 
 CREATE TABLE Members (
   GroupId NUMBER(4,0),
-  UserEmail VARCHAR(30),
-  PRIMARY KEY(GroupId, UserEmail),
+  UserEmail VARCHAR(30) PRIMARY KEY,
   FOREIGN KEY (GroupId) REFERENCES Team(GroupId),
   FOREIGN KEY (UserEmail) REFERENCES Participant(Email)
 );
@@ -43,8 +42,8 @@ CREATE TABLE Team_Requests (
 
 CREATE TABLE Group_Requests (
   GroupId NUMBER(4,0) PRIMARY KEY,
-  GroupName VARCHAR(30);
-)
+  GroupName VARCHAR(30)
+);
 /*
 
 Current tables 
@@ -73,6 +72,7 @@ LSHEN			       L_DEPT
 LSHEN			       LEASE_AGREEMENT
 LSHEN			       ITEMORDER
 LSHEN			       FORMTEST
+
 LSHEN			       EXPENSES
 LSHEN			       EVENTS
 LSHEN			       EMP_WORK
@@ -97,4 +97,4 @@ LSHEN			       ACTIVITIES
 LSHEN			       ACCOUNTS_6
 LSHEN			       STAFF_2010
 
-#/
+*/
