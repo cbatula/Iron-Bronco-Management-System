@@ -3,6 +3,7 @@ INSERT INTO Team VALUES (0,'A',NULL);
 INSERT INTO Team VALUES (1,'B',NULL);
 
 /* Make some sample participants */
+INSERT INTO Participant VALUES ('admin0@scu.edu','Admin','password',NULL);
 INSERT INTO Participant VALUES ('a0@scu.edu','Aria','password',NULL);
 INSERT INTO Participant VALUES ('a1@scu.edu','Beth','password',NULL);
 INSERT INTO Participant VALUES ('a2@scu.edu','Claire','password',NULL);
