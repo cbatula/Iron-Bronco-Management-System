@@ -1,61 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Join Team Test</title>
+</head>
+<body>
+  <h1>Join Team</h1>
+  <form action="./joinTeam_s.php" method='post'>
 <?php
-  if(!empty($_POST)) {
-    $groupName = $_POST['groupName'];
-    //userEmail will be $_SESSION['userEmail'] after login system is done
-    $userEmail = $_POST['userEmail'];
-    require '/webpages/lshen/dbInfo.php';
-    $conn=oci_connect($uname,$pword,$db);
-    if(!$conn) {
-      $e = oci_error;
-      print "<br> connection failed";
-      print htmlentities($e['message']);
-      exit;
+  $conn = OCILogon("lshen", "password",'//dbserver.engr.scu.edu/db11g');  
+  if(!$conn) {
+    //Connection failed, use input box
+    echo '<label for="groupName">Group Name: </label> <br />';
+    echo '<input type="text" name="groupName" id="groupName" /> <br />';
+  } else {
+    $sql = 'SELECT GROUPNAME, COUNT(GROUPNAME) FROM TEAM INNER JOIN MEMBERS ON TEAM.GROUPID = MEMBERS.GROUPID GROUP BY GROUPNAME HAVING COUNT(GROUPNAME) < 3';
+    $stid = oci_parse($conn,$sql);
+    if(!oci_execute($stid)) {
+      //Fail to execute query, use input box
+      echo '<label for="groupName">Group Name: </label> <br />';
+      echo '<input type="text" name="groupName" id="groupName" /> <br />';
+    } else {
+      echo '<label for="groupName">Group Name: </label> <br />';
+      echo '<select name="groupName" id = "groupName">';
+      echo '<option selected="selected">SELECT A GROUP</option>';
+        while(($row = oci_fetch_assoc($stid)) != false) {
+          echo '<option value="'.$row[GROUPNAME].'">'.$row[GROUPNAME].'</option>';
+        }
+      echo '</select> <br />';
     }
-
-     $sql = " BEGIN :v := joinTeamStatus(:groupname,:useremail); END;";
-     $query = oci_parse($conn,$sql);
-     oci_bind_by_name($query,':groupname',$groupName);
-     oci_bind_by_name($query,':useremail',$userEmail);
-     oci_bind_by_name($query,':v',$returnVal);
-     if(oci_execute($query)) {
-       //echo 'Function called successfully <br/>';
-       if($returnVal < 3) {
-         echo 'User inserted into team <br />';
-
-			echo $groupName;    
-
-
-			
-
-			session_name( 'user' );
-			session_start();
-			$stid = oci_parse($conn, "SELECT groupId FROM team WHERE groupName = :groupName");
-			oci_bind_by_name($stid, ':groupName', $groupName);
-			oci_execute($stid);
-
-			if (!$stid) {
-				echo "Error in preparing the statement";
-				exit;
-			}
-			
-			$row = oci_fetch_assoc($stid); 
-
-
-			var_dump($row);
-
-
-			$_SESSION['groupId'] = $row["GROUPID"];
-			echo "test ".$row["GROUPID"]." yeah";
-
-			header("Location: ./home.php");
-			exit;
-
-			$_SESSION['groupId'] = $row['groupId'];
-
-       }
-		else
-			echo "Group full: return and try again.";
-     }
   }
-    
 ?>
+    <!-- Have userEmail as a form value for testing, this will be a session variable-->
+    <label for="userEmail">User Email: </label> <br />
+    <input type="text" name="userEmail" id="userEmail" /> <br />
+    <input type="submit" value="Submit"/>
+  </form>
+</body>
+</html>
