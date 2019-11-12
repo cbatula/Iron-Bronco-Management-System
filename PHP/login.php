@@ -49,18 +49,14 @@ if($c)
 		header("Location: home.php");
 		exit();
 	}
-	
-	echo "Incorrect Password try again";
-
-
+	else
+	{	
+		echo "Incorrect Password try again";
+		oci_commit($c);
+		OCILogoff($c);
+		exit();
+	}
 
 }
-
-
-
-
-
-
-
-
-
+else
+	echo "Could not connect to Oracle\n";
