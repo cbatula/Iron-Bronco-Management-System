@@ -41,9 +41,9 @@ if($c)
 			exit;
 		}
 		
-		$row = oci_fetch_assoc($query);
-        	$_SESSION["groupId"] = $row['GROUPID'];
-		
+    $row = oci_fetch_assoc($query);
+    if($row != false)
+      $_SESSION["groupId"] = $row['GROUPID'];
  		oci_commit($c);
 		OCILogoff($c);
 		header("Location: home.php");
