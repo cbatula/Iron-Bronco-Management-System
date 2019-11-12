@@ -28,8 +28,7 @@
         //Define table
         echo "<table border=1>";
         //Define table header with attribute name
-        echo "<tr><th>Group Idt config --global credential.helper store
-          </th><th>Group Name</th></tr>";
+        echo "<tr><th>Group Id</th><th>Group Name</th></tr>";
         //Get each row of query
         while(oci_fetch($query)) {
             echo "<tr>";
