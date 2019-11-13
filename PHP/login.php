@@ -11,7 +11,7 @@ if($c)
 	$email=$_POST["email"];
 	$password=$_POST["password"];	
 
-	$stid_get = oci_parse($c, "SELECT password FROM participants WHERE userEmail = :userEmail");
+	$stid_get = oci_parse($c, "SELECT curpassword FROM participants WHERE email = :userEmail");
 
  	oci_bind_by_name($stid_get,':userEmail',$email);
 	
@@ -28,11 +28,11 @@ if($c)
 
 //	if(!$row){}
 	
-	if(strcmp($row['PASSWORD'],$_POST['password']) == 0)
+	if(strcmp($row['CURPASSWORD'],$_POST['password']) == 0)
 	{
 		$_SESSION["email"] = $email;
 		
-		$stid = oci_parse($conn, "SELECT groupId FROM Members WHERE UserEmail = :UserEmail");
+		$stid = oci_parse($c, "SELECT groupId FROM Members WHERE email = :UserEmail");
 		oci_bind_by_name($stid, ':UserEmail', $email);
 		oci_execute($stid);
 
@@ -41,7 +41,7 @@ if($c)
 			exit;
 		}
 		
-    $row = oci_fetch_assoc($query);
+    $row = oci_fetch_assoc($stid);
     if($row != false)
       $_SESSION["groupId"] = $row['GROUPID'];
  		oci_commit($c);
