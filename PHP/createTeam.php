@@ -1,46 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Team Test</title>
+</head>
+<body>
 <?php
-  if(!empty($_POST)) {
+session_name( 'user' );
+session_start();
+$conn = OCILogon("lshen", "password",'//dbserver.engr.scu.edu/db11g');
+if(!empty($_SESSION) && isset($_SESSION['email'])) {
+  print($_SESSION['email']);
+  if(empty($_POST)) {
+    echo '<h1> Create Team </h1>';
+    echo '<form action="./createTeam.php" method="post">';
+    echo '<label for="groupName">Group Name: </label> <br />';
+    echo '<input type="text" name="groupName" id="groupName" /> <br />';
+    echo '<input type="submit" value="Submit"/>';
+    echo '</form>';
+  } else {
     $groupName = $_POST['groupName'];
-    //userEmail will be $_SESSION['userEmail'] after login system is done
-    $userEmail = $_POST['userEmail'];
-    require '/webpages/lshen/dbInfo.php';
-    $conn=oci_connect($uname,$pword,$db);
+    $userEmail = $_SESSION['email'];
     if(!$conn) {
       $e = oci_error;
       print "<br> connection failed";
       print htmlentities($e['message']);
       exit;
     }
-    $sql = "BEGIN createteam(:groupname,:useremail); END;";
+    $sql = "INSERT INTO Team_Requests VALUES (:groupname, :useremail)";
     $query = oci_parse($conn,$sql);
     oci_bind_by_name($query, ':groupname',$groupName);
     oci_bind_by_name($query, ':useremail',$userEmail);
     if(oci_execute($query)) {
-      echo 'Group successfully created.';
+      header("Location: home.php");
     }
-    
-	echo $groupName;
-	  
-    session_name( 'user' );
-    session_start();
-    $stid = oci_parse($conn, "SELECT groupId FROM team WHERE groupName = :groupName");
-    oci_bind_by_name($stid, ':groupName', $groupName);
-    oci_execute($stid);
-
-    if (!$stid) {
-        echo "Error in preparing the statement";
-        exit;
-    }
-    
-    $row = oci_fetch_assoc($stid); 
-
-    var_dump($row);
-
-
-    $_SESSION['groupId'] = $row["GROUPID"];
-	echo "test ".$row["GROUPID"]." yeah";
-
-	header("Location: ./home.php");
-	exit;
+  }
 }
 ?>
+</body>
+</html>
