@@ -115,8 +115,8 @@ section:after {
 
 /* Style the footer */
 footer {
-  position : absolute;
-  bottom : 0;$_SESSION['groupId']
+  position : fixed;
+  bottom : 0;
   width: 100%;
   background-color: #777;
   padding: 10px;
