@@ -1,27 +1,29 @@
 <html>
+<link rel="stylesheet" type="text/css" href="../CSS/template.css">
 <center>
 
-<h1>
+<!--<h1>
 	Iron Bronco Competition	Log In
-</h1>
+</h1>-->
+
+<img src="https://www.scu.edu/media/offices/umc/scu-brand-guidelines/visual-identity-amp-photography/visual-identity-toolkit/logos-amp-seals/Mission-Horizontal-PMS201.png" alt="Trulli">
 
 <body>
 
 	<form action = "../PHP/login.php", method = "post">
-	<fieldset class="fieldset-auto-width">
-	
+		<fieldset class="fieldset-auto-width">
+
 		<p>
 			<label>Email</label>
-			<input type = "text" name = "email" value = "user@scu.edu"/>
+			<input id="username" class="form-control" name="j_username" type = "text" placeholder="e.g. bbronco@scu.edu" value = "" autofocus="autofocus"/>
 		</p>
 		
 		<p>
 			<label>Password</label>
-			<input type = "password" name = "password" value = "Password"/>
+			<input type = "password" name = "password" placeholder = "Password" value=""/>
 		</p>
 		
 		<p>
-			<label>Submit</label>
 			<input type = "submit" name = "submit" value = "Submit"/>
 		</p>
 
