@@ -22,3 +22,8 @@ Bootstrap 4 Chart.js - Bar Chart
 
 SQL injections
 404 errors?
+
+
+group ID select for every page
+change group name
+People cannot take admin as a name
