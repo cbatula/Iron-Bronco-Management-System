@@ -1,24 +1,30 @@
+.header {
+	width: 100%;
+	height: 16%;
+	white-space: pre-line;
+  margin: 20px auto;
+}
+
+.center {
+  text-align: center;
+}
+
 h1 {
-	color: white;
-	background-color: #b50043;
-	font-size: 33px;
+  color: #b50043;
+  font-size: 33px;
 	letter-spacing: 3px;
 	font-family: "Trajan W01 Regular";
 	text-align: center;
-	width: 60%;
-	height: 16%;
-	white-space: pre-line;
 }
 
 body {
-	font-family: Trade Gothic Next W01,Helvetica Neue,Helvetica,Arial,sans-serif;
+	font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
 	background-color: #f7f7f7;
 }
 
 img {
-	width: 40%;
+	width: 20%;
 	height: auto;
-	margin-bottom: 90px;
 }			             
 
 .form-control {
@@ -32,4 +38,8 @@ img {
 			box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
 			-webkit-transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 			transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.fieldset-auto-width {
+     display: inline-block;
 }
