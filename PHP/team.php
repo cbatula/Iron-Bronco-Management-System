@@ -21,8 +21,6 @@
 		session_name( 'user' );
 		session_start();
 
-		//$_SESSION['groupId'] = 0;
-
         /**Fetch group name**/
         $sql = "SELECT GroupName FROM Team WHERE groupid = :GroupId";
         $query = oci_parse($conn,$sql);				//Parse query
@@ -46,10 +44,10 @@
 		/**Check for any accept/reject requests**/
 		if(isset($_POST['option'])){
 			if( $_POST['option'] == "Accept" ){ 
-				$sql = "BEGIN jointeam(:groupname,:useremail); END;";
+				$sql = "INSERT INTO Members VALUES (:GroupId, :userEmail)";
 				$query = oci_parse($conn,$sql);
-				oci_bind_by_name($query, ':groupname',$groupName);
-				oci_bind_by_name($query, ':useremail',$_POST['email']);
+				oci_bind_by_name($query, ':GroupId', $_SESSION['groupId']);
+				oci_bind_by_name($query, ':userEmail', $_POST['email']);
 
 				if(oci_execute($query)){ 
 				    echo 'Success. Request was accepted.';
@@ -78,8 +76,12 @@
 					if (!$result) {
 						$e = oci_error($query);
 						trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
-					} else
-						echo "Success. Request was rejected. \nIf you made a mistake, please have the individual resubmit a request.";
+					} 
+					if( oci_num_rows($query) )
+						echo "Success. ".$_POST['email']."'s request was rejected. \nIf you made a mistake, please have the individual resubmit a request.";
+					else
+						echo "Error, request could not be found. Request not rejected.";
+
 
 			}else{
 				echo "error unidentfied submit button result: ".$_POST['option']. "\nPlease return and try again";
@@ -96,7 +98,7 @@
 		echo "<h1> Team $groupName </h1>";
 		echo "<h3> Team Members: </h3>";
 
-        $sql = "SELECT * FROM Members WHERE groupid = :GroupId";
+        $sql = "SELECT UserEmail FROM Members WHERE groupid = :GroupId";
 
         //Parse query
         $query = oci_parse($conn,$sql);
@@ -112,9 +114,9 @@
 		}
 
 		while($row = oci_fetch_assoc($query)){
-			foreach ($row as $item) {
-				echo ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;");
-			}
+
+				echo $row["USEREMAIL"]."<br>";
+
 		}
         //Define table
 
@@ -126,9 +128,21 @@
         echo "<table border=1>";
         //echo "<tr><th>Email</th> <th>Accept</th> <th>Reject</th></tr>";
 
-		echo "<td>fake email</td>\n";
-		echo '<td> <input type="submit" name="option" value="Accept"></td>';
-		echo '<td> <input type="submit" name="option" value="Reject"></td>';
+
+        $sql = "SELECT UserEmail FROM Team_Requests WHERE groupName = :groupName";
+
+        //Parse query
+        $query = oci_parse($conn,$sql);
+
+		//Bind variables
+		oci_bind_by_name($query, ':groupName', $groupName);
+
+        //Execute query
+        $result = oci_execute($query);
+		if (!$result) {
+			$e = oci_error($query);
+			trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
+		}
 
 		while($row = oci_fetch_assoc($query)){
 			echo "<tr>\n";
