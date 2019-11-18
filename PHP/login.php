@@ -21,7 +21,12 @@ if($c) {
 
 	if(strcmp($row['CURPASSWORD'],$_POST['password']) == 0) {
 		$_SESSION["email"] = $email;
-    $_SESSION['name'] = $row['NAME'];
+    $_SESSION['name'] = strtoupper($row['NAME']);
+
+    if($_SESSION['name'] == "ADMIN") {
+      header("Location: admin.php");
+		  exit();
+    }
 
 		$stid = oci_parse($c, "SELECT groupId FROM Members WHERE email = :UserEmail");
 		oci_bind_by_name($stid, ':UserEmail', $email);
