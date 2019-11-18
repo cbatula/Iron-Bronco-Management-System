@@ -9,7 +9,7 @@ if($c) {
 	$email=$_POST["j_username"];
 	$password=$_POST["password"];	
 
-	$stid_get = oci_parse($c, "SELECT curpassword, name FROM participant WHERE email = :userEmail");
+	$stid_get = oci_parse($c, "SELECT curpassword, name FROM participant WHERE UserEmail = :userEmail");
 
  	oci_bind_by_name($stid_get,':userEmail',$email);
   $tf = oci_execute($stid_get);
