@@ -4,6 +4,12 @@
   <meta charset="UTF-8">
   <title>Create Team Request</title>
   <link rel="stylesheet" type="text/css" href="../CSS/template.css" />
+<style>
+  fieldset {
+    margin-top: 15px;
+    width: 40%;
+  }
+</style>
 </head>
 <body>
 <img class="logo" src="https://www.scu.edu/media/offices/umc/scu-brand-guidelines/visual-identity-amp-photography/visual-identity-toolkit/logos-amp-seals/Mission-Horizontal-PMS201.png" alt="Trulli">
@@ -18,7 +24,7 @@ if(!empty($_SESSION) && isset($_SESSION['email'])) {
     echo '<div class="center">';
     echo '<form action="./createTeam.php" method="post">';
     echo '<fieldset class="fieldset-auto-width">';
-    echo '<label for="groupName">Group Name: </label> <br /> <br />';
+    echo '<label for="groupName">Please input the desired group name </label> <br /> <br />';
     echo '<input type="text" name="groupName" id="groupName" /> <br /> <br />';
     echo '<input type="submit" value="Submit"/>';
     echo '</fieldset>';
