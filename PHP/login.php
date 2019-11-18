@@ -6,7 +6,7 @@ if($c) {
 	session_name( 'user' );
   session_start();
 
-	$email=$_POST["email"];
+	$email=$_POST["j_username"];
 	$password=$_POST["password"];	
 
 	$stid_get = oci_parse($c, "SELECT curpassword, name FROM participant WHERE email = :userEmail");
