@@ -16,7 +16,7 @@ $.post("./admin_data.php", { gid: id, gname: name } ) };
   session_name('user');
   session_start();
 
-  if(issset($_SESSION['name']) && $_SESSION['name'] == 'Admin') {
+  if(isset($_SESSION['name']) && $_SESSION['name'] == 'Admin') {
     $conn = OCILogon("lshen", "password",'//dbserver.engr.scu.edu/db11g');
     if(!$conn) {
       echo 'Failed to log into database';
