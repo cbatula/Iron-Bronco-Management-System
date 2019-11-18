@@ -7,7 +7,6 @@
 <style>
   fieldset {
     margin-top: 15px;
-    width: 40%;
   }
 </style>
 </head>
@@ -16,11 +15,10 @@
 <?php
 session_name( 'user' );
 session_start();
-// $_SESSION['email'] = 'a7@scu.edu';
 $conn = OCILogon("lshen", "password",'//dbserver.engr.scu.edu/db11g');
 if(!empty($_SESSION) && isset($_SESSION['email'])) {
   if(empty($_POST)) {
-    echo '<div class="header"> <h1> Create Team</h1> </div>';
+    echo '<div class="header"> <h1> New Team Request</h1> </div>';
     echo '<div class="center">';
     echo '<form action="./createTeam.php" method="post">';
     echo '<fieldset class="fieldset-auto-width">';
