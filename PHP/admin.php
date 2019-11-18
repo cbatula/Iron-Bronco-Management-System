@@ -16,7 +16,6 @@ $.post("./admin_data.php", { gid: id, gname: name } ) };
   session_name('user');
   session_start();
 
-  $_SESSION['name'] = 'Admin';
   if($_SESSION['name'] == 'Admin') {
     $conn = OCILogon("lshen", "password",'//dbserver.engr.scu.edu/db11g');
     if(!$conn) {
