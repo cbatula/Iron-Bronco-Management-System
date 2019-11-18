@@ -1,0 +1,51 @@
+h1 {
+	//background-color: #b50043;
+	color: #b50043;
+	font-size: 33px;
+	letter-spacing: 3px;
+	font-family: "Trajan W01 Regular";
+	text-align: center;
+	width: 400px;
+	height: auto;
+	white-space: pre-line;
+}
+
+html { 
+	height: 50%;
+	background-color: #f7f7f7;
+}
+
+body { 
+	height: 50%;
+	background-size: 50% auto;
+	font-family: Trade Gothic Next W01,Helvetica Neue,Helvetica,Arial,sans-serif;
+}
+
+img {
+	width: 400px;
+	height: auto;
+	//margin-bottom: 90px;
+	text-align: left;
+}
+
+<a class="worldmarks text-trajan" href="https://www.scu.edu">
+		<span class="scu-primary">Santa Clara University</span><br>
+		<span class="scu-tagline">The Jesuit University in Silicon Valley</span>
+</a>						             
+
+
+.form-control {
+			width: 100%;
+			height: 37px;	
+			padding: 6px 12px;
+		 	background-color: #fff;
+			background-image: none;
+			border: 1px solid #ccc;
+			border-radius: 3px;
+			box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+			-webkit-transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+			transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+
+
