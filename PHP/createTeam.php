@@ -16,7 +16,7 @@
 <?php
 session_name( 'user' );
 session_start();
-$_SESSION['email'] = 'a7@scu.edu';
+// $_SESSION['email'] = 'a7@scu.edu';
 $conn = OCILogon("lshen", "password",'//dbserver.engr.scu.edu/db11g');
 if(!empty($_SESSION) && isset($_SESSION['email'])) {
   if(empty($_POST)) {
