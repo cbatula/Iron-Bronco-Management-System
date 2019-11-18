@@ -7,12 +7,13 @@ if ($c) {
 
 		session_name( 'user' );
 		session_start();
-	
-		$date=$_POST["date"];
+		
+		date_default_timezone_set('America/Los_Angelos');
+		$date=date('Y-m-d');
 
-		$stid_get = oci_parse($c, "SELECT swimming, biking, running FROM race_progress WHERE userEmail = :userEmail AND time = TO_DATE('$date','YY-MM-DD')");
+		$stid_get = oci_parse($c, "SELECT swimming, biking, running FROM race_progress WHERE userEmail = :userEmail AND time = TO_DATE('$date','YYYY-MM-DD')");
 
-		$email=$_POST["email"];
+		$email=$_SESSION["email"];
 
 
 		oci_bind_by_name($stid_get, ':userEmail', $email);
