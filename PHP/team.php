@@ -80,9 +80,51 @@
 					if( oci_num_rows($query) )
 						echo "Success. ".$_POST['email']."'s request was rejected. \nIf you made a mistake, please have the individual resubmit a request.";
 					else
-						echo "Error, request could not be found. Request not rejected.";
+						echo "Error, request could not be found. Request not rejected.";file:///usr/share/doc/HTML/index.html
 
 
+			}else if($_POST['option'] == "Submit"){
+				if(isset($_POST['newName'])){
+					$sql = "INSERT INTO Group_Requests VALUES (:GroupId,:GroupName)";    
+					$query = oci_parse($conn,$sql);
+					oci_bind_by_name($query, ':GroupId', $_SESSION['groupId']);
+					oci_bind_by_name($query, ':GroupName', $_POST['newName']);
+
+					if(oci_execute($query) ) 
+							echo 'Success. Request was accepted.';
+					else
+						echo "Error. Could not add member with email ".$_POST['email'].". Please check if team is full and try again.";
+				}else
+					echo "Error. Please input your new group name.";
+
+
+			}else if($_POST['option'] == "Delete"){
+				$sql = "SELECT COUNT(*) FROM Members WHERE groupId = :gId";
+				$query = oci_parse($conn,$sql);
+				oci_bind_by_name($query, ':gId', $_SESSION['groupId']);
+				$result = oci_execute($query);
+
+				if (!$result) {
+					$e = oci_error($query);
+					trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
+				}
+
+				$row = oci_fetch_assoc($query);
+
+				if( $row['COUNT(*)'] <= 1 ){
+					$sql = "DELETE FROM Members where UserEmail = :UserEmail";
+					$query = oci_parse($conn,$sql);
+					oci_bind_by_name($query, ':UserEmail', $_POST['email']);
+
+					$result = oci_execute($query);
+
+					if (!$result) {
+						$e = oci_error($query);
+						trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
+					} else
+						echo "Success. ".$_POST['email']."'s account was removed from group. \nIf you made a mistake, please have the individual resubmit a request.";
+				}else
+					echo "Error, you cannot delete the last member in a group.\n";
 			}else{
 				echo "error unidentfied submit button result: ".$_POST['option']. "\nPlease return and try again";
 				exit;
@@ -113,17 +155,43 @@
 			trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
 		}
 
+	  echo '<form action="" method="post">';
+
+      echo '<table border=1>';
+      echo '<tr><th>Email</th> <th>Name</th><th>Delete</th</tr>';
+
 		while($row = oci_fetch_assoc($query)){
+			echo "<tr>\n";
+			echo '<td>'.$row["USEREMAIL"]."</td>\n";
 
-				echo $row["USEREMAIL"]."<br>";
 
+        	$sql = "SELECT Name FROM Participant WHERE Email = :Email";
+		    //Parse query
+		    $q2 = oci_parse($conn,$sql);
+
+			//Bind variables
+			oci_bind_by_name($q2, ':Email', $row["USEREMAIL"]);
+
+		    //Execute query
+		    $result = oci_execute($q2);
+			if (!$result) {
+				$e = oci_error($q2);
+				trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
+			}
+			$nameArr = oci_fetch_assoc($q2);
+			echo '<td>'.$nameArr["NAME"]."</td>\n";
+			echo '<input type="hidden" name="email" id="hiddenField" value="'.$row["USEREMAIL"].'" />';
+			echo '<td> <input type="submit" name="option" value="Delete"></td>';
+			echo "</tr>\n";
 		}
+
+        echo "</table>";
+
+
         //Define table
 
 
 		echo "<h3> Pending Team Membership Requests </h3>";
-
-		echo '<form action="" method="post">';
 
         echo "<table border=1>";
         //echo "<tr><th>Email</th> <th>Accept</th> <th>Reject</th></tr>";
@@ -157,6 +225,9 @@
 		}
 		
         echo "</table>";
+
+		echo 'Send a request to change the group name to: <input type="text" name="newName" value="New Group Name">    <input type="submit" name="option" value="Submit">
+';
 
 		echo "</form>";
 		
