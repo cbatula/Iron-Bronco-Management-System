@@ -48,11 +48,11 @@ if ($c) {
 		OCILogoff($c);
 
 		if( $choice == 'join' ){
-			header("Location: ../HTML/joinTeam.html");
+			header("Location: ./joinTeam.php");
 			exit;
 
 		}else if( $choice == 'create' ){
-			header("Location: ../HTML/createTeam.html");
+			header("Location: ./createTeam.php");
 			exit;
 
 		}else{
