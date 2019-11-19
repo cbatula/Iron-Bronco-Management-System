@@ -9,9 +9,9 @@ if($c) {
 	$email=$_POST["j_username"];
 	$password=$_POST["password"];	
 
-	$stid_get = oci_parse($c, "SELECT curpassword, name FROM participant WHERE UserEmail = :userEmail");
+	$stid_get = oci_parse($c, "SELECT curpassword, name FROM participant WHERE Email = :Email");
 
- 	oci_bind_by_name($stid_get,':userEmail',$email);
+ 	oci_bind_by_name($stid_get,':Email',$email);
   $tf = oci_execute($stid_get);
   if(!$tf){
 		echo "Error in get statement";
@@ -28,7 +28,7 @@ if($c) {
 		  exit();
     }
 
-		$stid = oci_parse($c, "SELECT groupId FROM Members WHERE email = :UserEmail");
+		$stid = oci_parse($c, "SELECT groupId FROM Members WHERE UserEmail = :UserEmail");
 		oci_bind_by_name($stid, ':UserEmail', $email);
 		oci_execute($stid);
 
