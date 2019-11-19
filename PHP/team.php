@@ -2,7 +2,9 @@
     <head>
         <title> Team Page </title>
     </head>
-    <body>
+<link rel="stylesheet" type="text/css" href="../css/teamTemplate.css">
+	<body>
+
 
 <?php
         // Connect to Oracle database
@@ -137,7 +139,7 @@
 
 
 
-		echo "<h1> Team $groupName </h1>";
+		echo "<center><h1> Team $groupName </h1>";
 		echo "<h3> Team Members: </h3>";
 
         $sql = "SELECT UserEmail FROM Members WHERE groupid = :GroupId";
@@ -157,8 +159,8 @@
 
 	  echo '<form action="" method="post">';
 
-      echo '<table border=1>';
-      echo '<tr><th>Email</th> <th>Name</th><th>Delete</th</tr>';
+      echo '<table border=0';
+      echo '<tr><th> Email </th> <th> Name </th><th> Delete </th</tr></center>';
 
 		while($row = oci_fetch_assoc($query)){
 			echo "<tr>\n";
@@ -179,10 +181,12 @@
 				trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
 			}
 			$nameArr = oci_fetch_assoc($q2);
+			echo '<center>';
 			echo '<td>'.$nameArr["NAME"]."</td>\n";
 			echo '<input type="hidden" name="email" id="hiddenField" value="'.$row["USEREMAIL"].'" />';
 			echo '<td> <input type="submit" name="option" value="Delete"></td>';
 			echo "</tr>\n";
+			echo '</center>';
 		}
 
         echo "</table>";
@@ -191,9 +195,9 @@
         //Define table
 
 
-		echo "<h3> Pending Team Membership Requests </h3>";
+		echo "<center><h3> Pending Team Membership Requests </h3></center>";
 
-        echo "<table border=1>";
+        echo "<table border=0>";
         //echo "<tr><th>Email</th> <th>Accept</th> <th>Reject</th></tr>";
 
 
@@ -215,18 +219,20 @@
 		while($row = oci_fetch_assoc($query)){
 			echo "<tr>\n";
 			foreach ($row as $item) {
+				echo '<center>';
 				echo "<td>".($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;")."</td>\n";
 				echo '<input type="hidden" name="email" id="hiddenField" value="'.$item.'" />';
 
 				echo '<td> <input type="submit" name="option" value="Accept"></td>';
 				echo '<td> <input type="submit" name="option" value="Reject"></td>';
+				echo '/center>';
 			}
 			echo "</tr>\n";
 		}
 		
         echo "</table>";
 
-		echo 'Send a request to change the group name to: <input type="text" name="newName" value="New Group Name">    <input type="submit" name="option" value="Submit">
+		echo '<center>Send a request to change the group name to:<br><br> <input type="text" name="newName" value="New Group Name"> <br><br>   <input type="submit" name="option" value="Submit"></center>
 ';
 
 		echo "</form>";
