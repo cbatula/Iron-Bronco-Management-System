@@ -25,12 +25,6 @@ INSERT INTO Members VALUES (0,'a2@scu.edu');
 INSERT INTO Members VALUES (1,'a3@scu.edu');
 INSERT INTO Members VALUES (1,'a4@scu.edu');
 
-/* Put some participants that will be assigned to groups */
-INSERT INTO Participant_Not_In_Group VALUES ('a5@scu.edu');
-INSERT INTO Participant_Not_In_Group VALUES ('a6@scu.edu');
-INSERT INTO Participant_Not_In_Group VALUES ('a7@scu.edu');
-INSERT INTO Participant_Not_In_Group VALUES ('a8@scu.edu');
-
 /* Give some sample race progress */
 INSERT INTO Race_Progress VALUES ('a0@scu.edu',date '2019-11-01',0.1,0.2,0.3);
 INSERT INTO Race_Progress VALUES ('a0@scu.edu',date '2019-11-02',0.2,0.3,0.4);

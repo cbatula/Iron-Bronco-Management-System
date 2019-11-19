@@ -28,11 +28,6 @@ CREATE TABLE Race_Progress (
   FOREIGN KEY (UserEmail) REFERENCES Participant(Email)
 );
 
-CREATE TABLE Participant_Not_In_Group (
-  Email VARCHAR(30) PRIMARY KEY,
-  FOREIGN KEY (Email) REFERENCES Participant(Email)
-);
-
 CREATE TABLE Team_Requests (
   GroupName VARCHAR(30),
   UserEmail VARCHAR(30),
