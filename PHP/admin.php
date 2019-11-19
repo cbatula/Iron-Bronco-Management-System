@@ -249,7 +249,7 @@ $.post("./admin_data.php", { gid: id, gname: name } ) };
       oci_execute($query);
       $num_col = oci_num_fields($query);
 
-	  echo '<form action="" method="post">';
+
 
 	  $count = 0;
 
@@ -281,7 +281,9 @@ $.post("./admin_data.php", { gid: id, gname: name } ) };
 			$e = oci_error($q2);
 			trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
 		}
-        
+
+	  echo '<form action="" method="post">';        
+
 		echo '<input type="hidden" name="gid" id="hiddenField" value="'.$count.'" />';
 		echo '<input type="hidden" name="gname" id="hiddenField" value="'.$gname.'" />';
 		echo '<td> Add a member (by email): <input type="text" name="email" value="email"> </td>';
@@ -303,13 +305,13 @@ $.post("./admin_data.php", { gid: id, gname: name } ) };
 			
 			echo "</tr>\n";
 		}
-
+	  echo "</form>";
 
         echo '</tr>';
 		$count++;
       }
       echo '</table>';
-	  echo "</form>";
+
 
 
 
