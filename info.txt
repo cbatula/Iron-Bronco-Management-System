@@ -28,5 +28,4 @@ group ID select for every page
 People cannot take admin as a name
 reset password, username must be email
 change password
-group name CAN'T START WITH RAND
 admin can make more admins, and delete, but can't be less than 1 admin
