@@ -1,9 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="en">
+<link rel="stylesheet" type="text/css" href="../CSS/template.css">
 <head>
 <title>Iron Bronco Home</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <style type="text/css">
 * {
   box-sizing: border-box;
@@ -20,7 +23,7 @@ if ($c) {
 
 		$stid = oci_parse($c, "SELECT SUM(swimming), SUM(biking),SUM(running) FROM race_progress INNER JOIN members ON race_progress.useremail = members.useremail WHERE groupid = :GroupId");
 
-		$id = 0;
+		//$id = 0;
 
 		//$_SESSION['groupId'] = 0;
 
@@ -90,7 +93,7 @@ nav {
 }
 
 article {
-  float: left;
+  float: right;
   padding: 20px;
   width: 80%;
   background-color: #FFF;
@@ -166,11 +169,10 @@ echo "[2, ".$row['SUM(SWIMMING)'].", ".$row['SUM(BIKING)'].", ".$row['SUM(RUNNIN
     </script>
 
 </head>
+<?php if( isset( $_SESSION['email'] ) ){ ?>
 <body>
-
 <header>
-  <h2>Santa Clara University</h2>
-  	<h3 style="color:DimGrey;font-size:80%">Jesuit</h3>
+<img src="https://www.scu.edu/media/offices/umc/scu-brand-guidelines/visual-identity-amp-photography/visual-identity-toolkit/logos-amp-seals/Mission-Horizontal-PMS201.png" alt="Trulli">
 </header>
 
 <section>
@@ -178,7 +180,9 @@ echo "[2, ".$row['SUM(SWIMMING)'].", ".$row['SUM(BIKING)'].", ".$row['SUM(RUNNIN
   <nav>
     <ul>
       <li><a href="../HTML/input.html">Update progress</a></li>
-      <li><a href="./team.php">View team</a></li>
+      <li><a href="./team.php">Join a team</a></li>
+      <li><a href="./team.php">Create a team</a></li>
+      <li><a href="./jointeam.php">View team</a></li>
       <li><a href="./logout.php">Log out</a></li>
     </ul>
   </nav>
@@ -189,19 +193,23 @@ echo "[2, ".$row['SUM(SWIMMING)'].", ".$row['SUM(BIKING)'].", ".$row['SUM(RUNNIN
 
   </article>
 
-
+	<?php if( isset($_SESSION['groupId']) ) {?>
     <div style="position:relative;width:100%">
         <div id="columnchart_material" style="position:absolute;right:0px;top:100px;width: 800px; height: 500px;">
     </div>
-
+	<?php }?>
 
 </script> 
 
 </section>
-
+<!--
 <footer>
   <p>Footer</p>
 </footer>
-
+-->
 </body>
+<?php } else{
+			header("Location: ../HTML/login.html");
+			exit;
+		} ?>
 </html>
