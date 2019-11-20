@@ -232,7 +232,7 @@
 		
         echo "</table>";
 
-		echo '<center>Send a request to change the group name to:<br><br> <input type="text" name="newName" value="New Group Name"> <br><br>   <input type="submit" name="option" value="Submit"></center>
+		echo '<center>Send a request to change the group name to:<br><br> <input type="text" name="newName" placeholder="New Group Name"> <br><br>   <input type="submit" name="option" value="Submit"></center>
 ';
 
 		echo "</form>";
