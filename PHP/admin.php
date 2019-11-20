@@ -16,7 +16,7 @@ $.post("./admin_data.php", { gid: id, gname: name } ) };
   session_name('user');
   session_start();
 
-  if(isset($_SESSION['name']) && $_SESSION['name'] == 'Admin') {
+  if(isset($_SESSION['name']) && $_SESSION['name'] == 'ADMIN') {
     $conn = OCILogon("lshen", "password",'//dbserver.engr.scu.edu/db11g');
     if(!$conn) {
       echo 'Failed to log into database';
@@ -125,7 +125,7 @@ $.post("./admin_data.php", { gid: id, gname: name } ) };
 				oci_bind_by_name($query, ':GroupID',$_POST['gid']);
 
 				if(oci_execute($query)){ 
-					echo 'Success. The group "'.$_POST['gname'].'" was deleted.';
+					echo 'Success. The group "'.$_POST['gname'].'" was deleted. '.$_POST['gid'];
 					$sql = "DELETE FROM Group_Requests where GroupID = :GroupID";
 
 				}else
@@ -133,9 +133,9 @@ $.post("./admin_data.php", { gid: id, gname: name } ) };
 
 			}else if( $_POST['updateGr'] == "Add" ) {
 				if(isset($_POST['email'])){
-					$sql = "INSERT INTO Members VALUES (:gId,:userEmail)";    
+					$sql = "INSERT INTO Members VALUES (:GroupID,:userEmail)";    
 					$query = oci_parse($conn,$sql);
-					oci_bind_by_name($query, ':gId', $_POST['gid']);
+					oci_bind_by_name($query, ':GroupID', $_POST['gid']);
 					oci_bind_by_name($query, ':useremail', $_POST['email']);
 
 					if(oci_execute($query) ) 
@@ -284,7 +284,7 @@ $.post("./admin_data.php", { gid: id, gname: name } ) };
 
 	  echo '<form action="" method="post">';        
 
-		echo '<input type="hidden" name="gid" id="hiddenField" value="'.$count.'" />';
+		echo '<input type="hidden" name="gid" id="hiddenField" value="'.$id.'" />';
 		echo '<input type="hidden" name="gname" id="hiddenField" value="'.$gname.'" />';
 		echo '<td> Add a member (by email): <input type="text" name="email" value="email"> </td>';
 		echo '<td> <input type="submit" name="updateGr" value="Add" style="width:100%">    </td>';
