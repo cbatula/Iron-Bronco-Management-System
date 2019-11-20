@@ -113,7 +113,7 @@
 
 				$row = oci_fetch_assoc($query);
 
-				if( $row['COUNT(*)'] <= 1 ){
+				if( $row['COUNT(*)'] > 1 ){
 					$sql = "DELETE FROM Members where UserEmail = :UserEmail";
 					$query = oci_parse($conn,$sql);
 					oci_bind_by_name($query, ':UserEmail', $_POST['email']);
@@ -139,7 +139,7 @@
 
 
 
-		echo "<center><h1> Team $groupName </h1>";
+		echo "<center><h1> Team: $groupName </h1>";
 		echo "<h3> Team Members: </h3>";
 
         $sql = "SELECT UserEmail FROM Members WHERE groupid = :GroupId";
@@ -225,7 +225,7 @@
 
 				echo '<td> <input type="submit" name="option" value="Accept"></td>';
 				echo '<td> <input type="submit" name="option" value="Reject"></td>';
-				echo '/center>';
+				echo '</center>';
 			}
 			echo "</tr>\n";
 		}
