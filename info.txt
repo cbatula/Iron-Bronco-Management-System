@@ -29,3 +29,9 @@ People cannot take admin as a name
 reset password, username must be email
 change password
 admin can make more admins, and delete, but can't be less than 1 admin
+
+Can't create more than 1 join/create team request
+Delete join/create team request?
+ADMIN - not having a group 0? CHANGE CREATETEAM TO ALLOW FOR GAPS IN COUNT
+
+Create team - alert if team name is taken
