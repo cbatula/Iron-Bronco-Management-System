@@ -286,7 +286,7 @@ $.post("./admin_data.php", { gid: id, gname: name } ) };
 
 		echo '<input type="hidden" name="gid" id="hiddenField" value="'.$id.'" />';
 		echo '<input type="hidden" name="gname" id="hiddenField" value="'.$gname.'" />';
-		echo '<td> Add a member (by email): <input type="text" name="email" value="email"> </td>';
+		echo '<td> Add a member (by email): <input type="text" name="email" placeholder="email"> </td>';
 		echo '<td> <input type="submit" name="updateGr" value="Add" style="width:100%">    </td>';
 		echo '<td> <input type="submit" name="updateGr" value="Delete Group"></td>';
 
