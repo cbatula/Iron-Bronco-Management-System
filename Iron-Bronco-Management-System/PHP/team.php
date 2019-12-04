@@ -8,9 +8,6 @@
 
 <?php
         // Connect to Oracle database
-        // Data base need to have relation
-        //   FormTest(fullname varchar, age integer)
-        // for form to work
         $conn=OCILogon("lshen", "password",'//dbserver.engr.scu.edu/db11g');
         //Show error and don't load the page if unsuccessful connection
         if(!$conn) {
@@ -192,13 +189,11 @@
         echo "</table>";
 
 
-        //Define table
 
 
 		echo "<center><h3> Pending Team Membership Requests </h3></center>";
 
         echo "<table border=0>";
-        //echo "<tr><th>Email</th> <th>Accept</th> <th>Reject</th></tr>";
 
 
         $sql = "SELECT UserEmail FROM Team_Requests WHERE groupName = :groupName";
