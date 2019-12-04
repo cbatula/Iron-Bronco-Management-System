@@ -23,9 +23,7 @@ if ($c) {
 
 		$stid = oci_parse($c, "SELECT SUM(swimming), SUM(biking),SUM(running) FROM race_progress INNER JOIN members ON race_progress.useremail = members.useremail WHERE groupid = :GroupId");
 
-		//$id = 0;
-
-		//$_SESSION['groupId'] = 0;
+		//get sums from database for Google chart visualization
 
 		if (!$stid) {
 			$e = oci_error($c);
@@ -63,8 +61,9 @@ if ($c) {
 
 ?>
 
-
-body {
+/*styling for home page*/
+	
+body { 
   font-family: Arial, Helvetica, sans-serif;
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" />
     margin: 0
@@ -170,7 +169,7 @@ footer {
 </style>
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
+    <script type="text/javascript"> //display progress with Google Chart
       google.charts.load('current', {'packages':['bar']});
       google.charts.setOnLoadCallback(drawChart);
 
