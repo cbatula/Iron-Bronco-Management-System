@@ -8,14 +8,14 @@ if ($c) {
 
 
 	if(isset($_POST['submit'])){
-		$first = prepareInput($_POST['FirstName']);
+		$first = prepareInput($_POST['FirstName']); //preparing to insert participant into database
 		$last = prepareInput($_POST['LastName']);
 		$choice = prepareInput($_POST['choice']);
 
 		$email = prepareInput($_POST['email']);
 		$name = $first." ".$last;
     $password = prepareInput($_POST['password']);
-    $password = hash('sha256',$password);
+    $password = hash('sha256',$password); //hash password
 		//$passcheck = $_POST['passw2'];
 		//$groupName = $_POST['group'];
 
@@ -23,7 +23,7 @@ if ($c) {
 			echo "Error passwords do not match, please try again\n";
 		}*/
 
-		$stid = oci_parse($c, "INSERT INTO Participant VALUES (:Email,:Name, :Password, NULL)");
+		$stid = oci_parse($c, "INSERT INTO Participant VALUES (:Email,:Name, :Password, NULL)"); //insert values into database
 		oci_bind_by_name($stid, ':Email', $email);
 		oci_bind_by_name($stid, ':Name', $name);
 		oci_bind_by_name($stid, ':Password', $password);
