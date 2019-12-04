@@ -1,3 +1,7 @@
+/*
+ * This procedure generates a random available number for group id, then it will use the group id
+ * to create a team and insert the member to the team.
+ */
 CREATE OR REPLACE PROCEDURE
 createTeam
   (
@@ -20,6 +24,11 @@ BEGIN
 END;
 /
 
+/*
+ * This procedure status allows users to join a group, with the operation
+ * only being successful if there are spots left. A status is returned to
+ * indicate if the user actually joined the team.
+ */
 CREATE OR REPLACE FUNCTION joinTeamStatus
 (
   groupName0 IN team.groupname%type,
