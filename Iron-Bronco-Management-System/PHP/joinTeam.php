@@ -31,7 +31,7 @@
         echo '<input type="text" name="groupName" id="groupName" /> <br />';
       } else {
         $sql = 'SELECT GROUPNAME, COUNT(GROUPNAME) FROM TEAM INNER JOIN MEMBERS ON TEAM.GROUPID = MEMBERS.GROUPID GROUP BY GROUPNAME HAVING COUNT(GROUPNAME) < 3';
-        $stid = oci_parse($conn,$sql);
+        $stid = oci_parse($conn,$sql); //select group from database
         if(!oci_execute($stid)) {
           //Fail to execute query, use input box
           echo '<label for="groupName">Group Name: </label> <br /> <br />';
@@ -56,7 +56,7 @@
     } else {
       $groupName = $_POST['groupName'];
       $userEmail = $_SESSION['email'];
-      $sql = "INSERT INTO Team_Requests VALUES (:groupname, :useremail)";
+      $sql = "INSERT INTO Team_Requests VALUES (:groupname, :useremail)"; //insert team member info into database
       $stid = oci_parse($conn,$sql);
       oci_bind_by_name($stid,':groupname',$groupName);
       oci_bind_by_name($stid,':useremail',$userEmail);
