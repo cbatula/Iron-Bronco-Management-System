@@ -1,0 +1,45 @@
+.header {
+	width: 100%;
+	height: 16%;
+	white-space: pre-line;
+  margin: 20px auto;
+}
+
+.center {
+  text-align: center;
+}
+
+h1 {
+  color: #b50043;
+  font-size: 33px;
+	letter-spacing: 3px;
+	font-family: "Trajan W01 Regular";
+	text-align: center;
+}
+
+body {
+	font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+	background-color: #f7f7f7;
+}
+
+img {
+	width: 350px;
+	height: auto;
+}			             
+
+.form-control {
+			width: 100%;
+			height: 37px;	
+			padding: 6px 12px;
+		 	background-color: #fff;
+			background-image: none;
+			border: 1px solid #ccc;
+			border-radius: 3px;
+			box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+			-webkit-transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+			transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.fieldset-auto-width {
+     display: inline-block;
+}

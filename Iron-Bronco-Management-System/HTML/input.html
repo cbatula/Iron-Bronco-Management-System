@@ -1,0 +1,72 @@
+<html>
+	<center><h1>
+		Record Today's Progress
+	</h1></center>
+<link rel="stylesheet" type="text/css" href="../CSS/inputTemplate.css">
+	<body>
+		<center> Values will be added or subtracted to today's distance.
+		<form action="../PHP/insertProg.php", method="post">
+		<form action="./insertProg.php", method="post">
+
+			<center><fieldset class="fieldset-auto-width">		
+		
+<!--				<center><p>
+        	  			<label>Email</label>
+        		  		<input type = "text"
+        		        	name = "email"
+       			         	value = "user@scu.edu" />
+       				</p>
+				<p>
+        	  			<label>Date</label>
+        		  		<input type = "date"
+        		        	name = "date"Miles
+       			         	value = "YYYY-MM-DD" />
+       				</p> -->
+				<p>
+        	  			<label>Running</label>
+          				<input type = "number" step=0.01
+          		      		name = "runningDist"
+        	  	      		placeholder="miles" />
+       				</p>
+	
+				<p>
+        	  			<label>Swimming</label>
+        		  		<input type = "number" step=0.01
+        		        	name = "swimmingDist"
+       			         	placeholder="miles" />
+       				</p>
+		
+				<p>
+          				<label>Biking</label>
+          				<input type = "number" step=0.01
+               		 		name = "bikingDist"
+                			placeholder="miles" />
+       				</p>
+				<p>
+        	  			<label></label>
+        		  		<input type = "submit"
+        		        	name = "submit"
+       			         	placeholder="miles" />
+       				</p>
+
+			</fieldset>
+		</form>
+
+<p>
+</p>
+		
+
+ <a href="../PHP/home.php">
+		<button type="button">Go Back</button></a> <br/>
+
+		</center>
+	</body>
+
+</html>
+
+<style type="text/css">
+    .fieldset-auto-width {
+         display: inline-block;
+    }
+</style>
+<div>

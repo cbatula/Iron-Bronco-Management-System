@@ -1,0 +1,40 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="../CSS/indexTemplate.css">
+<center>
+<img src="https://www.scu.edu/media/offices/umc/scu-brand-guidelines/visual-identity-amp-photography/visual-identity-toolkit/logos-amp-seals/Mission-Horizontal-PMS201.png" alt="Trulli">
+
+
+<!<BODY BGCOLOR="#ffffff" TEXT="#000000" LINK="#ff0000" VLINK="#990033">
+
+<H1>Registration</H1>
+
+<form action="../PHP/insert.php" method="post">
+<fieldset style="width: 400px; height: 400px;">
+<p>
+First name: <input type="text" name="FirstName" placeholder="Bucky" required><br>
+</p>
+<p>
+Last name: <input type="text" name="LastName" placeholder="Bronco" required><br>
+</p>
+<p>
+Email: <input type="text" name="email" placeholder="bbronco@scu.edu" required><br>
+</p>
+<p>
+Password: <input type="password" name="password" placeholder="Password" required><br>
+</p>
+<p>
+Reenter password: <input type="password" name="passw2" placeholder="Password" required><br>
+</p>
+Would you like to:<br/>
+
+<input type="radio" name="choice" value="join"> Join a group<br />
+<input type="radio" name="choice" value="create"/> Create a group<br />
+<br>
+<input type="submit" name="submit" value="Submit">
+</fieldset>
+</form>
+
+
+</BODY>
+</center>
+</HTML>

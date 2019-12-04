@@ -1,0 +1,31 @@
+login - make it all session variables 
+team members accept/remove
+ADMIN -- Only accept team names
+group request system
+rand/search
+
+NO GROUP database for waiting for accepting requests and after removal
+
+Team page: edit team name, accept or reject requests, remove members
+
+Email: scu.edu
+Email a (temporary) password reset, AND reset after logging in
+
+
+GET RID OF PROGRESS?
+
+
+
+FORMATTING
+Bootstrap 4 Chart.js - Bar Chart
+
+
+SQL injections
+404 errors?
+
+
+group ID select for every page
+People cannot take admin as a name
+reset password, username must be email
+change password
+admin can make more admins, and delete, but can't be less than 1 admin
