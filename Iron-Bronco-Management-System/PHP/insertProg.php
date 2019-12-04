@@ -8,7 +8,7 @@ if ($c) {
 		session_name( 'user' );
 		session_start();
 		
-		date_default_timezone_set('America/Los_Angelos');
+		date_default_timezone_set('America/Los_Angelos'); //setting todays date as time to ensure data entered at correct place
 		$date=date('Y-m-d');
 
 		$stid_get = oci_parse($c, "SELECT swimming, biking, running FROM race_progress WHERE userEmail = :userEmail AND time = TO_DATE('$date','YYYY-MM-DD')");
@@ -25,7 +25,7 @@ if ($c) {
 		if(!$tf){
 			echo "Error in get statement";			
 			exit;
-		}									//use try catch
+		}									
 
 
 		$row = oci_fetch_assoc($stid_get);
@@ -35,12 +35,12 @@ if ($c) {
 //		$_SESSION['biking'] = $biking;
 		
 
-		$running = $_POST['runningDist'];
+		$running = $_POST['runningDist']; //setting local variables from user input
 		$swimming = $_POST['swimmingDist'];
 		$biking = $_POST['bikingDist'];
 
     if($row) {
-      $running += $row['RUNNING'];
+      $running += $row['RUNNING']; //if row exists then add to row value
       $swimming += $row['SWIMMING'];
       $biking += $row['BIKING'];
 
@@ -52,7 +52,7 @@ if ($c) {
 		$biking = 0;
 
       $stid_post = oci_parse($c, "UPDATE race_progress SET swimming= :swimming,biking= :biking,running= :running WHERE userEmail= :email AND time = TO_DATE('$date','YY-MM-DD')");
-      oci_bind_by_name($stid_post, ':email', $email);
+      oci_bind_by_name($stid_post, ':email', $email); //updating values in database
       oci_bind_by_name($stid_post, ':running', $running);
       oci_bind_by_name($stid_post, ':swimming', $swimming);
       oci_bind_by_name($stid_post, ':biking', $biking);
@@ -68,7 +68,7 @@ if ($c) {
 
     } else {
       $sql = "INSERT INTO race_progress VALUES (:email,TO_DATE('$date','YY-MM-DD'),:swimming,:biking,:running)";
-      $stid = oci_parse($c,$sql);
+      $stid = oci_parse($c,$sql); //update values in database
       oci_bind_by_name($stid, ':email', $email);
       oci_bind_by_name($stid, ':running', $running);
       oci_bind_by_name($stid, ':swimming', $swimming);
